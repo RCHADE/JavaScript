@@ -103,3 +103,218 @@ switch (expression) {
 - the `prompt` function 
 
 this course is not about it. It was mentioned so we can use in some exercice. Any way it work just like `input('blablabla')` in `python`
+
+## La portée des variables
+
+you can notice that if you run this code :
+
+```javascript
+let age = 18
+if (age >= 18) {
+    let suffix = 'hello'
+}
+console.log(suffix)
+```
+
+you will get the error message `suffix is not defined` due to that is is only difined in a certen block in here betwen the two `{ }` so if you do the following you wouldn't get any kind of error
+
+```javascript
+let age = 18
+if (age >= 18) {
+    let suffix = 'hello'
+    console.log(suffix)
+}
+```
+
+so we deduce of that that a variable is only defin in the block you define it in.
+
+but something like this is definitlly fine:
+```javascript
+let age = 18
+let suffix = 'hello, are you ok'
+if (age <= 18) {
+    suffix = 'nah i`d win'
+    console.log(suffix)
+    }
+```
+
+this is cuz that the variable `suffix` is created in the outer block so it is acceble in any block that is inside it.
+
+so all that is correct as long as you avoid using `var` cuz the variable created by var are much bigger than the block you created it in. 
+
+unlike variable created by `let` or `const` that have block scope that mean they are only acceble in the block you declared them in, variable created by `var` have function scope or global scope depending or where they are declared, that mean that if you declared a variable with `var` in a function that mean it is only acceble in the function you declare it in but if you declay outside of all function that mean it become a globale variable.
+
+```javascript
+function example() {
+    if (true) {
+        var functionVar = "I'm a function-scoped var";
+        let blockVar = "I'm a block-scoped var";
+    }
+
+    console.log(blockVar); // This will result in a ReferenceError: blockVar is not defined
+    console.log(functionVar); // This will log: "I'm a function-scoped var"
+}
+
+example();
+```
+
+
+**Note:** It's recommended to avoid declaring variables with `var` in modern JavaScript development. This is mainly because:
+
+1. **Block Scope vs. Function Scope:** Variables declared with `var` have function scope, which can lead to unexpected behavior and potential bugs. `let` and `const` provide block scope, which is more predictable and easier to reason about.
+
+2. **Hoisting:** Variables declared with `var` are hoisted to the top of their function or global scope, which can make code harder to understand and maintain. `let` and `const` are not hoisted in the same way, leading to clearer code organization.
+
+3. **Immutable Binding:** Unlike `let`, variables declared with `var` can be re-declared within the same scope, potentially causing confusion and unintended consequences.
+
+For better code readability, maintainability, and to avoid common pitfalls, prefer using `let` and `const` for variable declarations instead of `var`.
+
+let's continue
+
+if you run the code 
+
+```javascript
+let age = 18
+        let suffix = 'hello, are you ok'
+        if (age <= 18) {
+            suffix = 'nah i`d win'
+            console.log(suffix)
+        }
+console.log(suffix)
+```
+
+it will print `nag i'd win` then  `hello are you ok` cuz the change you make only apply to the variable inside the block acctually you can even creat a variable holding the same name on outside and on inside wich you would not be able to do if they both were in the same block
+
+```javascript
+let age = 18
+        let suffix = 'hello, are you ok'
+        if (age <= 18) {
+            let suffix = 'nah i`d win'
+            console.log(suffix)
+        }
+console.log(suffix)
+```
+That code will retun no error instead it will return `nah i'd win` then `hello, are you ok`
+
+## Les boucles
+
+
+**1. While Loop:**
+The `while` loop is used to repeatedly execute a block of code as long as a specified condition is true.
+
+Example:
+```javascript
+let count = 0;
+while (count < 5) {
+  console.log(count);
+  count++;
+}
+```
+
+**2. For Loop:**
+The `for` loop is a versatile loop that allows you to iterate over elements in arrays, strings, or perform repetitive tasks for a specified number of times.
+
+**Form:** 
+```javascript
+for (initialization; condition; increment/decrement) {
+  // code to be executed
+}
+```
+
+Example:
+```javascript
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+**For...In Loop:**
+The `for...in` loop is used to iterate over the enumerable properties of an object. It loops through the keys of the object.
+
+Example with Object:
+```javascript
+const person = {
+  name: 'John',
+  age: 30,
+  city: 'New York'
+};
+
+for (let key in person) {
+  console.log(key + ': ' + person[key]);
+}
+```
+
+**For...Of Loop:**
+The `for...of` loop is used to iterate over iterable objects such as arrays, strings, and more, accessing their values directly.
+
+Example with Array:
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+for (let num of numbers) {
+  console.log(num);
+}
+```
+
+## Les fonctions
+
+To make a function in javascript you should follow the following syntax:
+
+```javascript
+function yourfuctionname (parametre1, parametre2, ect) {
+  // then here you set the algrithme of your function (what you want it to do) and do not forgot to end it with a return `___` so it return what you putt in that blank
+  if (ect) {
+    return parametre1
+  } else {
+    return parametre2
+  }
+}
+
+//then you call the function like this
+a = true
+b = yourfuctionname('ect is true','ect is false', a)
+//now syposdly b is holding the value of 'ect is true
+
+```
+
+function are just type of object that you mean you can hold them in a variable just like this
+
+```javascript
+let f = function  (parameter) {
+  //putt any thing here
+}
+``` 
+and now isnted of calling them by thier name you can call them by the variable name like this `f(parameter)` the fact that they are just a type of object that meant they also have thiear methode and thier methodes and proprietes 
+
+in the first way of defining function without seting them in a variable that allow you to call them even befor creating them in you script code but it is not the cas in the second way when yo are setting tem in a variable.
+
+also if you set the function in a variable tha mean you will be accese it only in the block you created it with cuz it is a variable remeber it is only accesble in the block you cereated it in ofc assuming that you created it using `let` or `const` while if you creat a function without setting into a variable it will b accesble evrywhere you can crie about and name it weakness(bug) but it is acctually a futer you see if you created it in avariable you can recreated it outside that block and with the same variable name.
+
+chossing one of the way on the other totally depend on the situation do you want a globale function means that you will use a lot in so many diffrent places or are going to use the function only in a certen block and won;t need it again.
+
+a function does not nesserlly have to return somthing it could just do some certen job like changing the value of a variable or printing somthing on the console like this:
+
+```javascript
+let count = 0
+
+function f() {
+  count  = count + 1
+}
+
+// or you can do this
+
+function g() {
+  consol.log('you just called the function g')
+}
+```
+
+also if you did not notice yet a function does not have to take parameters, you can let those `()` blank. But when you call you do not putt any thin in them obvieslly.
+
+- `this` argument 
+
+function can have the argument `this` which will refer to the context they are on when calling the function
+
+it may look eassy but beleve me it's not.
+
+of cours wherever you call the function you can change what `this` refer to using method such as `call()` or `apply()`.
+
+- arrow function
