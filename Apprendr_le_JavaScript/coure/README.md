@@ -318,3 +318,6 @@ it may look eassy but beleve me it's not.
 of cours wherever you call the function you can change what `this` refer to using method such as `call()` or `apply()`.
 
 - arrow function
+
+
+so in here line 323 `i give up`  i couldn't contuinue putting nots. sorry i failed you =(
