@@ -89,20 +89,41 @@
     */
 
     class student {
-        ecole = 'harverd'
 
         constructor (firstname, lastname) {
             this.firstname = firstname 
             this.lastname = lastname
+            this.notes = {}
+            this.multipls = {}
         }
+
+        set nick (name) {
+            if (this._nick) {
+            this._nick = name
+            }
+        }
+
 
         fullname() {
             return this.firstname + " " + this.lastname
         }
 
-        addnote(thesubject,thenote) {
-            this.thesubject = thenote
+        addnote(thesubject,thenote,multipl) {
+            this.notes[thesubject] = thenote
+            this.multipls[thesubject] = multipl
         }
+
+        avr() {
+            let sum = 0
+            let multiplssum = 0
+            for (let i in this.notes) {
+                sum += this.notes[i]*this.multipls[i]
+                multiplssum += this.multipls[i]
+
+            }
+            return sum/multiplssum
+        }
+        
     }
 
     let john = new student('john', 'rizzer')
